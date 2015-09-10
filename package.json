@@ -1,0 +1,25 @@
+{
+  "name": "game-settings-ui",
+  "version": "1.0.0",
+  "description": "UI for Jump Rope City Game Settings",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": ""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^2.10.0",
+    "body-parser": "^1.13.3",
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "lodash": "^3.10.1",
+    "mongoose": "^4.1.6"
+  },
+  "devDependencies": {
+    "karma": "^0.13.9",
+    "protractor": "^2.2.0",
+    "uglifyjs": "^2.4.10"
+  }
+}
