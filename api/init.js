@@ -5,21 +5,26 @@
  * @param app: Express App Object
  */
 
-var difficulty = require('./routes/difficulty');
+var difficulty = require('./routes/difficulty.route');
+var setting = require('./routes/setting.route');
 
 module.exports = function (app) {
   var endpoints = {
     post: {
-      '/api/default': difficulty.default.post,
-      '/api/easy': difficulty.easy.post,
-      '/api/normal': difficulty.normal.post,
-      '/api/hard': difficulty.hard.post
+      '/api/difficulty/:level': difficulty.post,
+      '/api/difficulty/:level/setting': setting.post
     },
     get: {
-      '/api/default': difficulty.default.get,
-      '/api/easy': difficulty.easy.get,
-      '/api/normal': difficulty.normal.get,
-      '/api/hard': difficulty.hard.get
+      '/api/difficulty/:level': difficulty.get,
+      '/api/difficulty/:level/setting': setting.get
+    },
+    put: {
+      '/api/difficulty/:level': difficulty.put,
+      '/api/difficulty/:level/setting': setting.put
+    },
+    delete: {
+      '/api/difficulty/:level': difficulty.delete,
+      '/api/difficulty/:level/setting': setting.delete,
     }
   }
 

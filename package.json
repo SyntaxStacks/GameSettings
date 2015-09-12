@@ -5,6 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "test:api:unit": "mocha -r ./api/tests/unit/bootstrap.js ./api/tests/unit/**/*",
+    "test:api:e2e": "mocha -r ./api/tests/functional/bootstrap.js ./api/tests/functional",
+    "less": "./node_modules/less/bin/lessc ./frontend/app/less/style.less ./frontend/build/style.css",
     "build": ""
   },
   "author": "",
@@ -18,8 +21,12 @@
     "mongoose": "^4.1.6"
   },
   "devDependencies": {
+    "chai": "^3.2.0",
     "karma": "^0.13.9",
+    "less": "^2.5.1",
     "protractor": "^2.2.0",
+    "request": "^2.61.0",
+    "sinon": "^1.16.1",
     "uglifyjs": "^2.4.10"
   }
 }
