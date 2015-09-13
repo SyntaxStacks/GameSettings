@@ -1,0 +1,18 @@
+<div class="form-group" ng-show="addSettingFlag">
+  <label for="newSettingName">New Setting Name</label>
+  <input type="text" class="form-control" ng-model="setting.label" id="newSettingName">
+  <label for="newSettingName">New Setting Value</label>
+  <div class="input-group">
+    <input type="text" class="form-control" ng-model="setting.value" id="newSettingValue">
+    <div class="input-group-btn">
+      <a class="btn btn-primary" id="confirmSetting" ng-click="addSetting(setting)">
+        +<!-- <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> -->
+      </a>
+    </div>
+  </div>
+</div>
+<ul class="settings">
+  <li ng-repeat="setting in currentSettings track by $index">{{setting.label}}: {{setting.value}}</li>
+</ul>
+<a class="link btn btn-default" id="addSetting" href="#" ng-click="toggleAddSetting()">add setting</a>
+<a class="link btn btn-default" id="makeDefault" href="#" ng-disabled="currentDifficulty.default == true" ng-click="makeDefaultSettings()">set as default</a>

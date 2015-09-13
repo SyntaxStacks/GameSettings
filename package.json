@@ -5,10 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "test:api:unit": "mocha -r ./api/tests/unit/bootstrap.js ./api/tests/unit/**/*",
-    "test:api:e2e": "mocha -r ./api/tests/functional/bootstrap.js ./api/tests/functional",
-    "less": "./node_modules/less/bin/lessc ./frontend/app/less/style.less ./frontend/build/style.css",
-    "build": ""
+    "test:api:unit": "./node_modules/mocha/bin/mocha -r ./api/tests/unit/bootstrap.js ./api/tests/unit/**/*",
+    "test:api:e2e": "npm run webdriver update && ./node_modules/mocha/bin/mocha -r ./api/tests/functional/bootstrap.js ./api/tests/functional",
+    "test:fe:unit": "./node_modules/karma/bin/karma ./frontend/karma.conf.js",
+    "test:fe:e2e": "./node_modules/protractor/bin/protractor ./frontend/tests/protractor.conf.js",
+    "build": "./node_modules/bower/bin/bower install && npm run build:js && npm run build:less && npm run build:templates",
+    "build:js": "find frontend/app/js -type f -print | grep .js$ | grep -v 'module.js'| grep -v 'spec.js' | xargs -J % ./node_modules/uglifyjs/bin/uglifyjs frontend/app/js/**/*.module.js % frontend/app.module.js -c -o frontend/build/app.js",
+    "build:less": "./node_modules/less/bin/lessc ./frontend/app/less/style.less ./frontend/build/style.css",
+    "build:templates": " echo '' > frontend/build/templates.js && find frontend -type f -print | grep .tpl.html | xargs -n1 ./node_modules/ng-html2js/bin/ng-html2js >> frontend/build/templates.js ",
+    "watch": "./node_modules/watch/cli.js 'npm run build' ./frontend",
+    "webdriver": "./node_modules/webdriver-manager/bin/webdriver-manager"
   },
   "author": "",
   "license": "ISC",
@@ -21,12 +27,18 @@
     "mongoose": "^4.1.6"
   },
   "devDependencies": {
+    "bower": "^1.5.2",
     "chai": "^3.2.0",
+    "chai-as-promised": "^5.1.0",
     "karma": "^0.13.9",
     "less": "^2.5.1",
+    "mocha": "^2.3.2",
+    "ng-html2js": "^2.0.0",
     "protractor": "^2.2.0",
     "request": "^2.61.0",
     "sinon": "^1.16.1",
-    "uglifyjs": "^2.4.10"
+    "uglifyjs": "^2.4.10",
+    "watch": "^0.16.0",
+    "webdriver-manager": "^7.0.1"
   }
 }
