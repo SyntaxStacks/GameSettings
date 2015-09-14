@@ -1,18 +1,20 @@
-var api = require('./api');
+var _ = require('lodash');
 var promise = require('bluebird');
+var api = require('./api');
 
 describe('Setting API', function () {
   describe('Create Endpoint', function () {
     it('should create a setting', function (done) {
       var req = {
         method: 'POST',
-        url: '/api/difficulty/easy/setting',
-        body: ''
+        url: '/api/difficulty/easy/setting/max-health/100'
       };
       api(req).then(function (res) {
-        var expectedResponse = {};
+        var body = JSON.parse(res.body);
         expect(res.statusCode).to.equal(201);
-        expect(res.body).to.equal(expectedResponse);
+        expect(body.label).to.equal('easy');
+        var setting = _.find(body.settings, { label: 'max-health', value: '100' });
+        expect(_.isUndefined(setting)).to.be.false;
         done();
       });
     });
@@ -22,12 +24,13 @@ describe('Setting API', function () {
     it('should list settings', function (done) {
       var req = {
         method: 'GET',
-        url: '/api/difficulty/easy/setting',
+        url: '/api/difficulty/easy/setting/max-health',
       };
       api(req).then(function (res) {
-        var expectedResponse = {};
+        var body = JSON.parse(res.body);
         expect(res.statusCode).to.equal(200);
-        expect(res.body).to.equal(expectedResponse);
+        expect(body.label).to.equal('max-health');
+        expect(body.value).to.equal('100');
         done();
       });
     });
@@ -37,13 +40,13 @@ describe('Setting API', function () {
     it('should update setting', function (done) {
       var req = {
         method: 'PUT',
-        url: '/api/difficulty/easy/setting',
-        body: ''
+        url: '/api/difficulty/easy/setting/max-health/110'
       };
       api(req).then(function (res) {
-        var expectedResponse = {};
-        expect(res.statusCode).to.equal(204);
-        expect(res.body).to.equal(expectedResponse);
+        var body = JSON.parse(res.body);
+        var setting = _.find(body.settings, { label: 'max-health', value: '110' });
+        expect(res.statusCode).to.equal(200);
+        expect(_.isUndefined(setting)).to.be.false;
         done();
       });
     });
@@ -53,12 +56,10 @@ describe('Setting API', function () {
     it('should delete settings', function (done) {
       var req = {
         method: 'DELETE',
-        url: '/api/difficulty/easy/setting/maxEnemies',
+        url: '/api/difficulty/easy/setting/max-health',
       };
       api(req).then(function (res) {
-        var expectedResponse = {};
         expect(res.statusCode).to.equal(204);
-        expect(res.body).to.equal(expectedResponse);
         done();
       });
     });

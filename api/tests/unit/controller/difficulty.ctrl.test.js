@@ -11,8 +11,11 @@ describe('Difficulty Controller', function () {
   describe('Create', function () {
     it('should call models create function', function () {
       modelStub = sinon.stub(difficultyModel, 'create');
-      difficulty.create({});
-      expect(modelStub.calledWith({})).to.be.true;
+      var difficultyName = 'normal';
+      var isDefault = true;
+      var settings = [];
+      difficulty.create(difficultyName, isDefault, settings);
+      expect(modelStub.calledWith(difficultyName, isDefault, settings)).to.be.true;
     });
   });
 

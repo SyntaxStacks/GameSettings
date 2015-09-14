@@ -8,23 +8,26 @@
 var difficulty = require('./routes/difficulty.route');
 var setting = require('./routes/setting.route');
 
+
 module.exports = function (app) {
   var endpoints = {
     post: {
-      '/api/difficulty/:level': difficulty.post,
-      '/api/difficulty/:level/setting': setting.post
+      '/api/difficulty/:difficulty': difficulty.post,
+      '/api/difficulty/:difficulty/setting/:label/:value': setting.post,
+      '/api/reset-database': difficulty.reset
     },
     get: {
-      '/api/difficulty/:level': difficulty.get,
-      '/api/difficulty/:level/setting': setting.get
+      '/api/difficulty/': difficulty.get,
+      '/api/difficulty/:difficulty': difficulty.get,
+      '/api/difficulty/:difficulty/setting/:label': setting.get
     },
     put: {
-      '/api/difficulty/:level': difficulty.put,
-      '/api/difficulty/:level/setting': setting.put
+      '/api/difficulty/:difficulty': difficulty.put,
+      '/api/difficulty/:difficulty/setting/:label/:value': setting.put
     },
     delete: {
-      '/api/difficulty/:level': difficulty.delete,
-      '/api/difficulty/:level/setting': setting.delete,
+      '/api/difficulty/:difficulty': difficulty.delete,
+      '/api/difficulty/:difficulty/setting/:label': setting.delete,
     }
   }
 

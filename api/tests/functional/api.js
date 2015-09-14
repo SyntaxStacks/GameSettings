@@ -8,8 +8,10 @@ module.exports = function (opts) {
     method: opts.method,
   };
   if (opts.body) {
+    req.json = true
     req.body = opts.body;
   }
+
   return new promise(function (resolve, reject) {
     request(req, function (error, response, body) {
       if (error) {

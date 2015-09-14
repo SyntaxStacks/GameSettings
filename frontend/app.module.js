@@ -1,5 +1,4 @@
 angular.module('GameSettings', [
-  'ui.router',
   'ui.bootstrap',
   'GameSettings.difficulty'
 ])

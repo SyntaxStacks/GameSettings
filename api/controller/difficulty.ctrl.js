@@ -1,17 +1,17 @@
 var promise = require('bluebird');
-var difficulty = require('../model/difficulty.model');
+var difficultyModel = require('../model/difficulty.model');
 
 module.exports = {
-  create: function (opts) {
-    return difficulty.create(opts);
+  create: function (difficulty, isDefault, settings) {
+    return difficultyModel.create(difficulty, isDefault, settings);
   },
-  read: function (level) {
-    return difficulty.read(level);
+  read: function (difficulty) {
+    return difficultyModel.read(difficulty);
   },
-  update: function (level, data) {
-    return difficulty.update(level, data);
+  update: function (difficulty, isDefault, settings) {
+    return difficultyModel.update(difficulty, isDefault, settings);
   },
-  delete: function (level) {
-    return difficulty.destroy(level);
+  delete: function (difficulty) {
+    return difficultyModel.destroy(difficulty);
   }
 };
