@@ -47,55 +47,26 @@ angular.module('GameSettings.difficulty')
         },
         addSetting: {
           value: function (difficulty, label, value) {
-            var success = function (res) {
-
-            };
-            var failure = function (res) {
-
-            };
             var url = [this.apiPath, 'difficulty', difficulty, 'setting', label, value].join('/');
-            $http.post(url, body)
-              .then(success, failure);
+            return $http.post(url);
           }
         },
         updateSetting: {
-          value: function (difficulty, label, value) {
-            var success = function (res) {
-
-            };
-            var failure = function (res) {
-
-            };
-            var url = [this.apiPath, 'difficulty', difficulty, setting, label, value].join('/');
-            $http.put(url, body)
-              .then(success, failure);
+          value: function (difficulty, settingName, label, value) {
+            var url = [this.apiPath, 'difficulty', difficulty, 'setting', settingName, 'label', setting.label, 'value', setting.value].join('/');
+            return $http.put(url, body);
           }
         },
         removeSetting: {
           value: function (difficulty, label) {
-            var success = function (res) {
-
-            };
-            var failure = function (res) {
-
-            };
             var url = [this.apiPath, 'difficulty', difficulty, 'setting',  label].join('/');
-            $http.delete(url)
-              .then(success, failure);
-
+            return $http.delete(url);
           }
         },
         getSetting: {
           value: function (difficulty, label) {
-            var success = function (res) {
-
-            };
-            var failure = function (res) {
-
-            };
             var url = [this.apiPath, 'difficulty', difficulty, 'setting', label].join('/');
-            $http.get(url)
-              .then(success, failure);
+            return $http.get(url);
           }
         }
       });

@@ -23,7 +23,7 @@ module.exports = function (app) {
     },
     put: {
       '/api/difficulty/:difficulty': difficulty.put,
-      '/api/difficulty/:difficulty/setting/:label/:value': setting.put
+      '/api/difficulty/:difficulty/setting/:settingName/label/:label/value/:value': setting.put
     },
     delete: {
       '/api/difficulty/:difficulty': difficulty.delete,

@@ -43,8 +43,8 @@ module.exports = {
   put: function (req, res) {
     var difficulty = req.params.difficulty;
     var body = req.body;
-    var isDefault = body.isDefault || false;
-    var settings = body.settings || [];
+    var isDefault = body.isDefault;
+    var settings = body.settings;
     return difficultyCtrl.update(difficulty, isDefault, settings)
       .then(_.partial(ok, res))
       .catch(_.partial(error, res));
@@ -60,18 +60,18 @@ module.exports = {
     var model = require('../model/difficulty.model');
     mongoose.connection.db.dropDatabase(function () {
       var difficulties = [
-        model.create('easy', true, [{
+        model.create('Easy', true, [{
           label: 'health',
           value: 150
         },{
           label: 'enemies',
           value: 20
         }]),
-        model.create('normal', false, [{
+        model.create('Normal', false, [{
           label: 'health',
           value: 150
         }]),
-        model.create('hard', false, [{
+        model.create('Hard', false, [{
           label: 'health',
           value: 50
         },{

@@ -22,8 +22,8 @@ module.exports = {
   read: function (difficulty, label) {
     return difficultyModel.readSetting(difficulty, label);
   },
-  update: function (difficulty, label, setting) {
-    return difficultyModel.updateSetting(difficulty, label, setting);
+  update: function (difficulty, settingName, label, value) {
+    return difficultyModel.updateSetting(difficulty, settingName, label, value);
   },
   delete: function (difficulty, label) {
     return difficultyModel.destroySetting(difficulty, label);

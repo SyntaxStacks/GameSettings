@@ -18,6 +18,7 @@ angular.module('GameSettings.difficulty')
           var success = function (res) {
             me.setDifficulties(res.data);
             me.setCurrentDifficulty(me.difficulties[0]);
+            console.log(me.currentDifficulty);
           };
 
           DifficultyAPI.getAllDifficulty()
@@ -69,15 +70,27 @@ angular.module('GameSettings.difficulty')
       addSetting:{
         value: function (setting) {
           this.toggleAddSetting();
-          this.currentDifficulty.settings.push(_.clone(setting));
-          this.refreshSettings();
+          var me = this;
+          var success = function () {
+            me.currentDifficulty.settings.push(_.clone(setting));
+            me.refreshSettings();
+          };
+
+          DifficultyAPI.addSetting(me.currentDifficulty.label, setting.label, setting.value)
+            .then(success);
         }
       },
       updateSetting: {
-        value: function (setting) {
-          var currentSetting = _.find(this.currentDifficulty.settings, { label: setting.label });
-          currentSetting.value = setting.value;
-          this.refreshSettings();
+        value: function (label, setting) {
+          var me = this;
+          var success = function (res) {
+            var currentSetting = _.find(me.currentDifficulty.settings, { label: label });
+            currentSetting.label = setting.label;
+            currentSetting.value = setting.value;
+            me.refreshSettings();
+          };
+          DifficultyAPI.updateSetting(me.CurrentDifficulty.label, label, setting.label, setting.value)
+            .then(success);
         }
       },
       removeSetting: {
@@ -90,7 +103,6 @@ angular.module('GameSettings.difficulty')
       },
       refreshSettings: {
         value: function () {
-                 console.log(this.difficulties);
           var defaultSettings = _.find(this.difficulties, { isDefault: true }).settings;
           defaultSettings = _.transform(defaultSettings, function (obj, setting) {
             obj[setting.label] = setting.value;
@@ -116,17 +128,21 @@ angular.module('GameSettings.difficulty')
       makeDefaultSettings: {
         value: function () {
           var me = this;
-          var diffs = _.map(me.difficulties, function (difficulty) {
-            if (difficulty.label == me.currentDifficulty.label) {
-              difficulty.default = true;
-            } else {
-              difficulty.default = false;
-            }
+          var success = function (res) {
+            var diffs = _.map(me.difficulties, function (difficulty) {
+              if (difficulty.label == me.currentDifficulty.label) {
+                difficulty.default = true;
+              } else {
+                difficulty.default = false;
+              }
 
-            return difficulty;
-          });
-          this.setDifficulties(diffs);
-          this.refreshSettings();
+              return difficulty;
+            });
+            me.setDifficulties(diffs);
+            me.refreshSettings();
+          }
+          DifficultyAPI.updateDifficulty(me.currentDifficulty.label, true)
+            .then(success);
         }
       }
     });

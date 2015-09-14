@@ -103,15 +103,16 @@ module.exports = {
       });
     });
   },
-  updateSetting: function (difficulty, label, value) {
+  updateSetting: function (difficulty, settingName, label, value) {
     var me = this;
     return new Promise(function (resolve, reject) {
       return me.model.findOne({ label: difficulty }, function (err, diff) {
         if (err) { return reject(err); }
-        var setting = _.find(diff.settings, { label: label });
+        var setting = _.find(diff.settings, { label: settingName });
         if (_.isUndefined(setting)) {
           return reject({ error: 'setting not found' });
         }
+        setting.label = label;
         setting.value = value;
 
         diff.save(function (err) {

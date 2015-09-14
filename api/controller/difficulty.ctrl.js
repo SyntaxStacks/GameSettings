@@ -9,7 +9,14 @@ module.exports = {
     return difficultyModel.read(difficulty);
   },
   update: function (difficulty, isDefault, settings) {
-    return difficultyModel.update(difficulty, isDefault, settings);
+    return new promise(function (resolve, reject) {
+      if (isDefault == true) {
+        return difficultyModel.model.update({ isDefault: false}, function () {
+          resolve(difficultyModel.update(difficulty, isDefault, settings));
+        });
+      }
+      resolve(difficultyModel.update(difficulty, isDefault, settings));
+    });
   },
   delete: function (difficulty) {
     return difficultyModel.destroy(difficulty);
