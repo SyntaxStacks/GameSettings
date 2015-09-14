@@ -1,15 +1,17 @@
-<div class="form-group" ng-show="Difficulty.addDifficultyFlag">
-  <label for="newDifficultyName">New Difficulty</label>
-  <div class="input-group">
-    <input type="text" class="form-control" ng-model="difficultyName" id="newDifficultyName">
-    <div class="input-group-btn">
-      <a class="btn btn-primary" id="confirmDifficulty" ng-click="Difficulty.addDifficulty(difficultyName)">
-        +<!-- <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> -->
-      </a>
+<ul class="nav nav-pills nav-stacked unity-nav">
+  <li role="presentation" ng-repeat="difficulty in Difficulty.difficulties track by $index" ng-class="{active: difficulty == Difficulty.currentDifficulty}" ng-click='Difficulty.setCurrentDifficulty(difficulty)'><a href="#" class="link">{{difficulty.label}}</a></li>
+  <li>
+    <a class="link btn btn-default" id="addDifficulty" href="#" ng-click="Difficulty.toggleAddDifficulty()">add difficulty</a>
+    <div class="" ng-show="Difficulty.addDifficultyFlag">
+      <label for="newDifficultyName">New Difficulty</label>
+      <div class="input-group">
+        <input type="text" class="form-control" ng-model="difficultyName" id="newDifficultyName">
+        <div class="input-group-btn">
+          <a class="btn btn-primary" id="confirmDifficulty" ng-click="Difficulty.addDifficulty(difficultyName)">
+            +<!-- <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> -->
+          </a>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-<ul class="nav">
-  <li class="link"ng-repeat="difficulty in Difficulty.difficulties" ng-class="{active: difficulty == Difficulty.currentDifficulty}" ng-click='Difficulty.setCurrentDifficulty(difficulty)'>{{difficulty.label}}</li>
+  </li>
 </ul>
-<a class="link btn btn-default" id="addDifficulty" href="#" ng-click="Difficulty.toggleAddDifficulty()">add difficulty</a>

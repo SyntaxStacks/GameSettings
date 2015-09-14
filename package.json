@@ -4,7 +4,7 @@
   "description": "UI for Jump Rope City Game Settings",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run test:api:unit && npm run test:api:e2e && npm run test:fe:e2e",
     "test:api:unit": "./node_modules/mocha/bin/mocha -r ./api/tests/unit/bootstrap.js ./api/tests/unit/**/*",
     "test:api:e2e": "npm run webdriver update && ./node_modules/mocha/bin/mocha -r ./api/tests/functional/bootstrap.js ./api/tests/functional",
     "test:fe:unit": "./node_modules/karma/bin/karma ./frontend/karma.conf.js",

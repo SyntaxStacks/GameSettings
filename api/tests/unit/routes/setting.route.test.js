@@ -9,7 +9,7 @@ describe('Setting Routes', function () {
 
   beforeEach(function () {
     res = { send: sinon.stub() };
-    req = { param: { level: 'test' } };
+    req = { params: { difficulty: 'test', label: 'setting', value: 'value' } };
   });
 
   afterEach(function () {
@@ -25,15 +25,17 @@ describe('Setting Routes', function () {
       }));
     });
 
-    it('should return a 200', function () {
+    it('should return a 200', function (done) {
       routes.get(req, res).then(function () {
         expect(res.statusCode).to.equal(200);
+        done();
       });
     });
 
-    it('should send the response', function () {
+    it('should send the response', function (done) {
       routes.get(req, res).then(function () {
         expect(res.send.calledOnce).to.be.true;
+        done();
       });
     });
 
@@ -47,15 +49,17 @@ describe('Setting Routes', function () {
       req.body = '{}';
     });
 
-    it('should return a 200', function () {
+    it('should return a 200', function (done) {
       routes.put(req, res).then(function () {
         expect(res.statusCode).to.equal(200);
+        done();
       });
     });
 
-    it('should send the response', function () {
+    it('should send the response', function (done) {
       routes.put(req, res).then(function () {
         expect(res.send.calledOnce).to.be.true;
+        done();
       });
     });
   });
@@ -68,15 +72,17 @@ describe('Setting Routes', function () {
       req.body = '{}';
     });
 
-    it('should return a 200', function () {
+    it('should return a 201', function (done) {
       routes.post(req, res).then(function () {
-        expect(res.statusCode).to.equal(200);
+        expect(res.statusCode).to.equal(201);
+        done();
       });
     });
 
-    it('should send the response', function () {
+    it('should send the response', function (done) {
       routes.post(req, res).then(function () {
         expect(res.send.calledOnce).to.be.true;
+        done();
       });
     });
   });
@@ -88,15 +94,17 @@ describe('Setting Routes', function () {
       }));
     });
 
-    it('should return a 200', function () {
+    it('should return a 204', function (done) {
       routes.delete(req, res).then(function () {
-        expect(res.statusCode).to.equal(200);
+        expect(res.statusCode).to.equal(204);
+        done();
       });
     });
 
-    it('should send the response', function () {
+    it('should send the response', function (done) {
       routes.delete(req, res).then(function () {
         expect(res.send.calledOnce).to.be.true;
+        done();
       });
     });
 

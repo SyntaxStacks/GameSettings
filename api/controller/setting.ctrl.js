@@ -9,9 +9,7 @@ module.exports = {
       var settingIsProperType = _.contains(['string', 'number', 'boolean'], typeof setting) || setting === null;
 
       if (!(labelMatchesPattern && settingIsProperType)) {
-        console.log(labelMatchesPattern);
-        console.log(settingIsProperType);
-        return reject();
+        return reject({ error: 'invalid setting' });
       }
 
       return difficultyModel.createSetting(difficulty, label, setting)
@@ -22,8 +20,8 @@ module.exports = {
   read: function (difficulty, label) {
     return difficultyModel.readSetting(difficulty, label);
   },
-  update: function (difficulty, label, setting) {
-    return difficultyModel.updateSetting(difficulty, label, setting);
+  update: function (difficulty, settingName, label, value) {
+    return difficultyModel.updateSetting(difficulty, settingName, label, value);
   },
   delete: function (difficulty, label) {
     return difficultyModel.destroySetting(difficulty, label);

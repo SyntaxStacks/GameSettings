@@ -10,9 +10,9 @@ describe('Difficulty Controller', function () {
 
   describe('Create', function () {
     it('should call models create function', function () {
-      modelStub = sinon.stub(difficultyModel, 'create');
+      modelStub = sinon.stub(difficultyModel, 'create').returns({ then: function (f) { f(); } });
       var difficultyName = 'normal';
-      var isDefault = true;
+      var isDefault = false;
       var settings = [];
       difficulty.create(difficultyName, isDefault, settings);
       expect(modelStub.calledWith(difficultyName, isDefault, settings)).to.be.true;
@@ -29,9 +29,9 @@ describe('Difficulty Controller', function () {
 
   describe('Update', function () {
     it('should call models update function', function () {
-      modelStub = sinon.stub(difficultyModel, 'update');
-      difficulty.update('easy', {});
-      expect(modelStub.calledWith('easy', {})).to.be.true;
+      modelStub = sinon.stub(difficultyModel, 'update').returns({ then: function (fn) { fn(); } });
+      difficulty.update('easy', false);
+      expect(modelStub.calledWith('easy', false)).to.be.true;
     });
   });
 

@@ -13,6 +13,19 @@ body {
   margin: 0;
 }
 
+.logo {
+  height: 50px;
+  background-image: url(/images/logo_unity.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.title {
+  font-weight: 100;
+  font-size: xx-large;
+  line-height: 50px;
+}
+
 .link {
   color: rgb(34, 44, 55);
   font: 16px/135% Helvetica, Arial, sans-serif;
@@ -22,9 +35,25 @@ body {
   }
 }
 
-.nav {
-  .active {
+.unity-nav {
+  .active > a {
     color: #ff0066;
-    border-color-right: #ff0066;
+    background-color: #00cccc !important;
   }
+}
+
+.remove-link {
+  border-color: #d9534f;
+}
+
+.default-link {
+  border-color: #5cb85c;
+}
+
+.add-link {
+  border-color: #337ab7;
+}
+
+.no-padding {
+  padding: 0 0 0 0;
 }

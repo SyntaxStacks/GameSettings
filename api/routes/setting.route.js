@@ -39,9 +39,10 @@ module.exports = {
   },
   put: function (req, res) {
     var difficulty = req.params.difficulty;
+    var settingName = req.params.settingName;
     var label = req.params.label;
-    var setting = req.params.value;
-    return settingCtrl.update(difficulty, label, setting)
+    var value = req.params.value;
+    return settingCtrl.update(difficulty, settingName, label, value)
       .then(_.partial(ok, res))
       .catch(_.partial(error, res));
   },

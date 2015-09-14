@@ -1,7 +1,7 @@
 module.exports = Object.create({}, {
   difficultyLink: {
     value: function (text) {
-      return element(by.cssContainingText('.nav li.link', text));
+      return element(by.cssContainingText('.nav a.link', text));
     }
   },
   activeDifficultyLink: {
@@ -35,6 +35,26 @@ module.exports = Object.create({}, {
       this.confirmDifficultyNameBtn.click();
     }
   },
+  makeDefaultBtn: {
+    get: function () {
+      return $('#makeDefault');
+    }
+  },
+  setDifficultyAsDefault: {
+    value: function () {
+      this.makeDefaultBtn.click();
+    }
+  },
+  removeDifficultyBtn: {
+    get: function () {
+      return $('#removeDifficulty');
+    }
+  },
+  removeCurrentDifficulty: {
+    value: function () {
+      this.removeDifficultyBtn.click();
+    }
+  },
   settings:{
     get: function () {
       return element.all(by.repeater('setting in currentSettings track by $index'));
@@ -42,7 +62,7 @@ module.exports = Object.create({}, {
   },
   setting: {
     value: function (name) {
-      return element(by.cssContainingText('ul.settings li', name));
+      return element(by.cssContainingText('dl.settings div', name));
     }
   },
   addSettingBtn: {
@@ -81,9 +101,24 @@ module.exports = Object.create({}, {
       this.confirmSettingNameBtn.click();
     }
   },
-  makeDefaultBtn: {
-    get: function () {
-      return $('#makeDefault');
+  modifySetting: {
+    value: function (name, value) {
+      var setting = this.setting(name);
+
+      browser.actions().mouseMove(setting).perform();
+      setting.element(by.css('a.edit')).click()
+      setting.element(by.css('.editSettingName')).sendKeys(name);
+      setting.element(by.css('.editSettingValue')).sendKeys(value);
+      this.editSettingValueInput = value;
+      setting.element(by.css('a.confirm-edit')).click();
     }
-  }
+  },
+  removeSetting: {
+    value: function (name, value) {
+      var setting = this.setting(name);
+      browser.actions().mouseMove(setting).perform();
+      setting.element(by.css('.remove')).click()
+    }
+  },
+
 });
