@@ -1,11 +1,11 @@
 # Game Settings App
 
-A simple web app for managing game Settings
+A simple web app for managing game settings
 
 [API Spec](api/README.md)
 ## Requirements
 
-* Vagrant
+* [Vagrant](https://www.vagrantup.com/)
 
 ## Development
 The vagrant environment has everything needed for development. After launching
@@ -18,6 +18,7 @@ vagrant up
 ```
 
 ## Testing
+Running `npm test` will run unit and functional tests on the API and functional tests on the frontend
 ```
 npm test
 ```
