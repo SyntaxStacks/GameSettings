@@ -8,7 +8,7 @@ exports.config = {
 
     // A base URL for your application under test. Calls to protractor.get()
     // with relative paths will be prepended with this.
-    baseUrl: 'localhost:8080',
+    baseUrl: 'localhost:9000',
 
     specs: [
         path.resolve(__dirname + '/stories/**/*.test.js')

@@ -1,14 +1,10 @@
 web:
   build: .
-  ports: 
-    - "8080:3000"
+  ports:
+    - "9000:3000"
   volumes:
-    - .:/app
+    - ./:/app
   links:
     - mongo
 mongo:
   image: mongo
-docs:
-  image: capoferro/swagger-ui
-  ports:
-    - "80:8082"
