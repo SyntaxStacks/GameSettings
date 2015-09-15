@@ -19,7 +19,7 @@ describe('Difficulty API', function () {
         body: { isDefault: true, settings: [] }
       };
       api(req).then(function (res) {
-        expect(res.statusCode).to.equal(200);
+        expect(res.statusCode).to.equal(201);
         var body = res.body;
         expect(body.label).to.equal('Ultra');
         expect(body.isDefault).to.equal(true);
@@ -96,4 +96,3 @@ describe('Difficulty API', function () {
     });
   });
 });
-

@@ -73,9 +73,9 @@ describe('Difficulty Routes', function () {
       req.body = '{}';
     });
 
-    it('should return a 200', function (done) {
+    it('should return a 201', function (done) {
       routes.post(req, res).then(function () {
-        expect(res.statusCode).to.equal(200);
+        expect(res.statusCode).to.equal(201);
         done();
       });
     });

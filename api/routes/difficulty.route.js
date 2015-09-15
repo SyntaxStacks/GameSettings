@@ -3,14 +3,14 @@ var promise = require('bluebird');
 var mongoose = require('mongoose');
 var difficultyCtrl = require('../controller/difficulty.ctrl');
 
-var ok = function (res, difficultys) {
+var ok = function (res, difficulties) {
   res.statusCode = 200;
-  res.send(difficultys);
+  res.send(difficulties);
 }
 
-var ok = function (res, difficultys) {
-  res.statusCode = 200;
-  res.send(difficultys);
+var created = function (res, difficulty) {
+  res.statusCode = 201;
+  res.send(difficulty);
 }
 
 var noContent = function (res) {
@@ -31,7 +31,7 @@ module.exports = {
     var isDefault = body.isDefault || false;
     var settings = body.settings || [];
     return difficultyCtrl.create(difficulty, isDefault, settings)
-      .then(_.partial(ok, res))
+      .then(_.partial(created, res))
       .catch(_.partial(error, res));
   },
   get: function (req, res) {
