@@ -11,6 +11,8 @@ A simple web app for managing game settings
 The vagrant environment has everything needed for development. After launching
 vagrant, the application will be available at localhost:9000. The code is
 mounted into the vagrant box allowing development to be worked on locally.
+
+Run the following commands to start the app:
 ```
 npm install
 npm run build
