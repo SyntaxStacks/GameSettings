@@ -47,7 +47,7 @@ angular.module('GameSettings.difficulty')
         },
         addSetting: {
           value: function (difficulty, label, value) {
-            var url = [this.apiPath, 'difficulty', difficulty, 'setting', label, value].join('/');
+            var url = [this.apiPath, 'difficulty', difficulty, 'setting', label, 'value', value].join('/');
             return $http.post(url);
           }
         },
@@ -60,6 +60,7 @@ angular.module('GameSettings.difficulty')
         removeSetting: {
           value: function (difficulty, label) {
             var url = [this.apiPath, 'difficulty', difficulty, 'setting',  label].join('/');
+            console.log(url);
             return $http.delete(url);
           }
         },
@@ -67,6 +68,11 @@ angular.module('GameSettings.difficulty')
           value: function (difficulty, label) {
             var url = [this.apiPath, 'difficulty', difficulty, 'setting', label].join('/');
             return $http.get(url);
+          }
+        },
+        resetDatabase: {
+          value: function () {
+            return $http.post(this.apiPath + '/reset-database');
           }
         }
       });

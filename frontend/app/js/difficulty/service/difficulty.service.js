@@ -18,7 +18,6 @@ angular.module('GameSettings.difficulty')
           var success = function (res) {
             me.setDifficulties(res.data);
             me.setCurrentDifficulty(me.difficulties[0]);
-            console.log(me.currentDifficulty);
           };
 
           DifficultyAPI.getAllDifficulty()
@@ -103,10 +102,16 @@ angular.module('GameSettings.difficulty')
       },
       removeSetting: {
         value: function (removeSetting) {
-          var currentSetting = _.remove(this.currentDifficulty.settings, function (setting) {
-            return setting.label == removeSetting.label;
-          });
-          this.refreshSettings();
+          var me = this;
+          var success = function () {
+            var currentSetting = _.remove(me.currentDifficulty.settings, function (setting) {
+              return setting.label == removeSetting.label;
+            });
+            me.refreshSettings();
+          };
+
+          DifficultyAPI.removeSetting(me.currentDifficulty.label, removeSetting.label)
+            .then(success);
         }
       },
       refreshSettings: {
@@ -150,6 +155,17 @@ angular.module('GameSettings.difficulty')
             me.refreshSettings();
           }
           DifficultyAPI.updateDifficulty(me.currentDifficulty.label, true)
+            .then(success);
+        }
+      },
+      resetDatabase: {
+        value: function () {
+          var me = this;
+          var success = function (res) {
+            me.setDefaultDifficulties();
+          };
+
+          DifficultyAPI.resetDatabase()
             .then(success);
         }
       }

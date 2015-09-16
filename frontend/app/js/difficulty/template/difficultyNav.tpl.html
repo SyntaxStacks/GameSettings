@@ -1,5 +1,6 @@
 <ul class="nav nav-pills nav-stacked unity-nav">
   <li role="presentation" ng-repeat="difficulty in Difficulty.difficulties track by $index" ng-class="{active: difficulty == Difficulty.currentDifficulty}" ng-click='Difficulty.setCurrentDifficulty(difficulty)'><a href="#" class="link">{{difficulty.label}}</a></li>
+  <li><hr></li>
   <li>
     <a class="link btn btn-default" id="addDifficulty" href="#" ng-click="Difficulty.toggleAddDifficulty()">add difficulty</a>
     <div class="" ng-show="Difficulty.addDifficultyFlag">
@@ -13,5 +14,8 @@
         </div>
       </div>
     </div>
+  </li>
+  <li>
+    <a class="link btn btn-default" id="reset" href="#" ng-click="Difficulty.resetDatabase()">reset</a>
   </li>
 </ul>

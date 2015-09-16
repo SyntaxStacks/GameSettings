@@ -106,7 +106,7 @@ module.exports = Object.create({}, {
       var setting = this.setting(name);
 
       browser.actions().mouseMove(setting).perform();
-      setting.element(by.css('a.edit')).click()
+      setting.element(by.css('.edit-btn')).click()
       setting.element(by.css('.editSettingName')).sendKeys(name);
       setting.element(by.css('.editSettingValue')).sendKeys(value);
       this.editSettingValueInput = value;
@@ -117,7 +117,7 @@ module.exports = Object.create({}, {
     value: function (name, value) {
       var setting = this.setting(name);
       browser.actions().mouseMove(setting).perform();
-      setting.element(by.css('.remove')).click()
+      setting.element(by.css('.remove-btn')).click()
     }
   },
 
