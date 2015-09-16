@@ -34,21 +34,33 @@ describe('Difficulty Menu', function () {
   });
 
   describe('Settings', function () {
+    before(function () {
+      page.difficultyLink('Easy').click();
+    });
+
     it('should add a setting', function () {
-      page.addSetting('health', 70);
-      expect(page.setting('health').isDisplayed()).to.eventually.be.true;
+      page.addSetting('ammo', 70);
+      expect(page.setting('ammo').isDisplayed()).to.eventually.be.true;
     });
 
     it('should modify a setting', function () {
-      page.modifySetting('health', 103);
-      expect(page.setting('health').getText()).to.eventually.contain('103');
+      page.modifySetting('ammo', 103);
+      expect(page.setting('ammo').getText()).to.eventually.contain('103');
     });
 
     it('should remove a setting', function () {
-      page.removeSetting('health');
-      expect(page.setting('health').isPresent()).to.eventually.be.false;
+      page.removeSetting('ammo');
+      expect(page.setting('ammo').isPresent()).to.eventually.be.false;
     });
 
+    it('should modify a setting, remove another, and have correct values', function () {
+      page.modifySetting('health', 103);
+      expect(page.setting('health').getText()).to.eventually.contain('103');
+
+      page.removeSetting('enemies');
+      expect(page.setting('enemies').isPresent()).to.eventually.be.false;
+      expect(page.setting('health').getText()).to.eventually.contain('103');
+    });
   });
 });
 

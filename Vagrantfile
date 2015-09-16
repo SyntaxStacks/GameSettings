@@ -67,6 +67,6 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", inline: <<-SHELL
     cd /vagrant
     docker-compose up -d
-    curl -X POST http://localhost:9000/api/reset-database
+    sleep 2 && curl -X POST http://localhost:9000/api/reset-database
   SHELL
 end

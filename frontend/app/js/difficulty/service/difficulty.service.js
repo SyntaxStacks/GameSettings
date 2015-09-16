@@ -20,19 +20,13 @@ angular.module('GameSettings.difficulty')
             me.setCurrentDifficulty(me.difficulties[0]);
           };
 
-          DifficultyAPI.getAllDifficulty()
+          return DifficultyAPI.getAllDifficulty()
             .then(success);
         }
       },
       setCurrentDifficulty: {
         value: function (difficulty) {
           this.currentDifficulty = difficulty;
-          this.refreshSettings();
-        }
-      },
-      setCurrentSettings: {
-        value: function (settings) {
-          this.currentSettings = settings;
           this.refreshSettings();
         }
       },
@@ -91,10 +85,11 @@ angular.module('GameSettings.difficulty')
         value: function (label, setting) {
           var me = this;
           var success = function (res) {
-            var currentSetting = _.find(me.currentSettings, { label: label });
+            var settings = me.currentSettings;
+            var currentSetting = _.find(settings, { label: label });
             currentSetting.label = setting.label;
             currentSetting.value = setting.value;
-            // me.setCurrentSettings(currentSettings);
+            me.currentSettings = settings;
           };
           DifficultyAPI.updateSetting(me.currentDifficulty.label, label, setting.label, setting.value)
             .then(success);
@@ -104,10 +99,9 @@ angular.module('GameSettings.difficulty')
         value: function (removeSetting) {
           var me = this;
           var success = function () {
-            var currentSetting = _.remove(me.currentDifficulty.settings, function (setting) {
+            var currentSetting = _.remove(me.currentSettings, function (setting) {
               return setting.label == removeSetting.label;
             });
-            me.refreshSettings();
           };
 
           DifficultyAPI.removeSetting(me.currentDifficulty.label, removeSetting.label)
@@ -116,20 +110,21 @@ angular.module('GameSettings.difficulty')
       },
       refreshSettings: {
         value: function () {
-          var defaultSettings = _.find(this.difficulties, { isDefault: true }).settings;
+          var me = this;
+          var defaultSettings = _.find(me.difficulties, { isDefault: true }).settings;
           defaultSettings = _.transform(defaultSettings, function (obj, setting) {
             obj[setting.label] = setting.value;
             return obj;
           }, {});
 
-          var currentSettings = this.currentDifficulty.settings;
+          var currentSettings = me.currentDifficulty.settings;
           currentSettings = _.transform(currentSettings, function (obj, setting) {
             obj[setting.label] = setting.value;
             return obj;
           }, {});
 
           currentSettings = _.merge(defaultSettings, currentSettings);
-          this.currentSettings = _.transform(currentSettings, function (arr, value, label) {
+          me.currentSettings = _.transform(currentSettings, function (arr, value, label) {
             arr.push({
               label: label,
               value: value

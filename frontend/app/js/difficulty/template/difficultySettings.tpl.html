@@ -9,14 +9,14 @@
       <div class="form-group" ng-show="settings[$index]">
         <div class="row">
           <label for="editSettingName">Edit Setting Name</label>
-          <input type="text" class="form-control editSettingName" ng-model="setting[$index].label">
-          <label for="editSettingName">Edit Setting Value</label>
+          <input type="text" class="form-control editSettingName" ng-model="editSetting[$index].label" ng-init="editSetting[$index].label = setting.label">
         </div>
         <div class="row">
           <div class="input-group">
-            <input type="text" class="form-control editSettingValue" ng-model="setting[$index].value">
+            <label for="editSettingName">Edit Setting Value</label>
+            <input type="text" class="form-control editSettingValue" ng-model="editSetting[$index].value" ng-init="editSetting[$index].value = setting.value">
             <div class="input-group-btn">
-              <a class="btn btn-primary confirm-edit" ng-click="Difficulty.updateSetting(setting.label, setting[$index]); settings[$index] = false">
+              <a class="btn btn-primary confirm-edit" ng-click="Difficulty.updateSetting(setting.label, editSetting[$index]); settings[$index] = false">
                 +<!-- <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> -->
               </a>
             </div>
