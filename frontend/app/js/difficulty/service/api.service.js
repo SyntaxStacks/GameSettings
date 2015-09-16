@@ -60,7 +60,6 @@ angular.module('GameSettings.difficulty')
         removeSetting: {
           value: function (difficulty, label) {
             var url = [this.apiPath, 'difficulty', difficulty, 'setting',  label].join('/');
-            console.log(url);
             return $http.delete(url);
           }
         },

@@ -16,7 +16,7 @@
     "watch": "./node_modules/watch/cli.js 'npm run build' ./frontend",
     "webdriver": "./node_modules/webdriver-manager/bin/webdriver-manager"
   },
-  "author": "",
+  "author": "John Lozano",
   "license": "ISC",
   "dependencies": {
     "bluebird": "^2.10.0",

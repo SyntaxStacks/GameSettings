@@ -5,7 +5,7 @@
   "authors": [
     "John Lozano <john.lozano@rackspace.com>"
   ],
-  "description": "UI for Jump Rope City Game Settings",
+  "description": "Web App for Jump Rope City Game Settings",
   "license": "MIT",
   "ignore": [
     "**/.*",
@@ -16,7 +16,6 @@
   ],
   "dependencies": {
     "angular": "~1.4.5",
-    "ui-router": "~0.2.15",
     "angular-bootstrap": "~0.13.4",
     "bootstrap": "~3.3.5",
     "lodash": "~3.10.1"

@@ -1,10 +1,3 @@
-/**
- * init.js
- * Initializes Game Settings API
- *
- * @param app: Express App Object
- */
-
 var difficulty = require('./routes/difficulty.route');
 var setting = require('./routes/setting.route');
 
