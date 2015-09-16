@@ -1,6 +1,6 @@
 {
   "name": "game-settings-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "UI for Jump Rope City Game Settings",
   "main": "index.js",
   "scripts": {
