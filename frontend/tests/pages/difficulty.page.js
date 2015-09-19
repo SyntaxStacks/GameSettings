@@ -119,8 +119,8 @@ module.exports = Object.create({}, {
       setting.element(by.css('.editSettingName')).clear();
       setting.element(by.css('.editSettingName')).sendKeys(name);
       setting.element(by.cssContainingText('option', type)).click();
-      setting.element(by.css('.editSettingValue')).clear();
-      setting.element(by.css('.editSettingValue')).sendKeys(value);
+      setting.element(by.css('#editSettingValue')).clear();
+      setting.element(by.css('#editSettingValue')).sendKeys(value);
       this.editSettingValueInput = value;
       setting.element(by.css('a.confirm-edit')).click();
     }

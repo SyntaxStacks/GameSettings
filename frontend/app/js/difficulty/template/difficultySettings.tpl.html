@@ -2,7 +2,7 @@
   <div ng-repeat="setting in Difficulty.currentSettings track by $index" ng-mouseover="show[$index] = true" ng-mouseleave="show[$index] = false" ng-init="show[$index] = false">
     <dt><span class="setting-name">{{setting.label}}:</span></dt>
     <dd>
-      <span class="setting-value">{{setting.value}}</span>
+      <span class="setting-value">{{setting.value || 'null'}}</span>
       <span ng-show="show[$index] && !settings[$index]" ng-click="settings[$index] = !settings[$index]" class="btn btn-info glyphicon glyphicon-pencil edit-btn" aria-hidden="true"></span>
       <span ng-show="show[$index] && !settings[$index]" ng-click="Difficulty.removeSetting(setting)" class="btn btn-danger glyphicon glyphicon-remove remove-btn" aria-hidden="true"></span>
       <span ng-show="show[$index] && settings[$index]" ng-click="settings[$index] = !settings[$index]" class="btn btn-danger glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
@@ -12,15 +12,46 @@
           <input type="text" class="form-control editSettingName" ng-model="editSetting[$index].label" ng-init="editSetting[$index].label = setting.label">
         </div>
         <div class="row">
-          <label for="editSettingName">Edit Setting Type</label>
-          <select ng-options="type for type in ['String', 'Number', 'Boolean', 'Null']" class="form-control editSettingType" ng-model="editSetting[$index].type" ng-init="editSetting[$index].type = 'String'"></select>
+          <label for="editSettingType">Edit Setting Type</label>
+          <select id="editSettingType" ng-options="type for type in ['String', 'Number', 'Boolean', 'Null']" class="form-control editSettingType" ng-model="editSetting[$index].type" ng-init="editSetting[$index].type = 'String'"></select>
         </div>
         <div class="row">
-          <div class="input-group">
+          <div ng-if="editSetting[$index].type === 'String'">
             <label for="editSettingValue">Edit Setting Value</label>
-            <input type="text" class="form-control editSettingValue" ng-model="editSetting[$index].value" ng-init="editSetting[$index].value = setting.value">
-            <div class="input-group-btn">
-              <a class="btn btn-primary confirm-edit" ng-click="Difficulty.updateSetting(setting.label, editSetting[$index]); settings[$index] = false"> + </a>
+            <div class="input-group">
+              <input type="text" class="form-control" ng-model="editSetting[$index].value" id="editSettingValue">
+              <div class="input-group-btn">
+                <a class="btn btn-primary confirm-edit" ng-click="Difficulty.updateSetting(setting.label, editSetting[$index]); settings[$index] = false"> + </a>
+              </div>
+            </div>
+          </div>
+          <div ng-if="editSetting[$index].type === 'Number'">
+            <label for="editSettingValue">Edit Setting Value</label>
+            <div class="input-group">
+              <input type="number" class="form-control" ng-model="editSetting[$index].value" id="editSettingValue">
+              <div class="input-group-btn">
+                <a class="btn btn-primary confirm-edit" ng-click="Difficulty.updateSetting(setting.label, editSetting[$index]); settings[$index] = false"> + </a>
+              </div>
+            </div>
+          </div>
+          <div ng-if="editSetting[$index].type === 'Boolean'">
+            <label for="editSettingValue">Edit Setting Value</label>
+            <div class="button-group">
+              <div class="btn-group" dropdown is-open="booleanValue" ng-init="booleanValue = false">
+                <button id="editSettingValue" type="button" class="btn btn-primary" dropdown-toggle ng-disabled="disabled">
+                  {{ editSetting[$index].value != undefined ? editSetting[$index].value : 'Value'}} <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="booleanValue">
+                  <li role="menuitem" ng-click="editSetting[$index].value = true"><a href="#">True</a></li>
+                  <li role="menuitem" ng-click="editSetting[$index].value = false"><a href="#">False</a></li>
+                </ul>
+                <a class="btn btn-primary confirm-edit" ng-click="Difficulty.updateSetting(setting.label, editSetting[$index]); settings[$index] = false"> + </a>
+              </div>
+            </div>
+          </div>
+          <div ng-if="editSetting[$index].type === 'Null'">
+            <div class="input-group">
+              <a class="btn btn-primary confirm-edit" ng-click="editSetting[$index].value = 'null'; Difficulty.updateSetting(setting.label, editSetting[$index]); settings[$index] = false"> + </a>
             </div>
           </div>
         </div>
@@ -37,21 +68,19 @@
   <label for="newSettingType">New Setting Type</label>
   <select id="newSettingType" ng-options="type for type in ['String', 'Number', 'Boolean', 'Null']" class="form-control newSettingType" ng-model="setting.type" ng-init="setting.type = 'String'"></select>
   <div ng-if="setting.type === 'String'">
+    <label for="newSettinValue">New Setting Value</label>
     <div class="input-group">
-      <label for="newSettinValue">New Setting Value</label>
-      <input type="text" class="form-control" ng-model="setting.value" id="newSettingValue">
       <div class="input-group-btn">
-        <a class="btn btn-primary" id="confirmSetting" ng-click="Difficulty.addSetting(setting)">
-          +<!-- <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> -->
-        </a>
+        <input type="text" class="form-control" ng-model="setting.value" id="newSettingValue">
+        <a class="btn btn-primary" id="confirmSetting" ng-click="Difficulty.addSetting(setting)"> + </a>
       </div>
     </div>
   </div>
   <div ng-if="setting.type === 'Number'">
+    <label for="newSettinValue">New Setting Value</label>
     <div class="input-group">
-      <label for="newSettinValue">New Setting Value</label>
-      <input type="number" class="form-control" ng-model="setting.value" id="newSettingValue">
       <div class="input-group-btn">
+        <input type="number" class="form-control" ng-model="setting.value" id="newSettingValue">
         <a class="btn btn-primary" id="confirmSetting" ng-click="Difficulty.addSetting(setting)">
           +<!-- <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> -->
         </a>
@@ -59,9 +88,9 @@
     </div>
   </div>
   <div ng-if="setting.type === 'Boolean'">
+    <label for="newSettinValue">New Setting Value</label>
     <div class="button-group">
       <div class="btn-group" dropdown is-open="booleanValue" ng-init="booleanValue = false">
-        <label for="newSettinValue">New Setting Value</label>
         <button id="booleanValue" type="button" class="btn btn-primary" dropdown-toggle ng-disabled="disabled">
           {{ setting.value != undefined ? setting.value : 'Value'}} <span class="caret"></span>
         </button>
@@ -69,18 +98,13 @@
           <li role="menuitem" ng-click="setting.value = true"><a href="#">True</a></li>
           <li role="menuitem" ng-click="setting.value = false"><a href="#">False</a></li>
         </ul>
-        <a class="btn btn-primary" id="confirmSetting" ng-click="Difficulty.addSetting(setting)">
-          +<!-- <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> -->
-        </a>
+        <a class="btn btn-primary" id="confirmSetting" ng-click="Difficulty.addSetting(setting)"> + </a>
       </div>
     </div>
   </div>
   <div ng-if="setting.type === 'Null'">
-    <input type="hidden" ng-init="setting.value = null;">
-    <div class="input-group-btn">
-      <a class="btn btn-primary" id="confirmSetting" ng-click="Difficulty.addSetting(setting)">
-        +<!-- <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> -->
-      </a>
+    <div class="input-group">
+      <a class="btn btn-primary" id="confirmSetting" ng-click="setting.value = 'null'; Difficulty.addSetting(setting)"> + </a>
     </div>
   </div>
 </div>

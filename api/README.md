@@ -48,6 +48,10 @@
 ```
 
 #### Read Difficulty - /api/difficulty/:difficulty
+
+##### parameters:
+ * difficulty - The label of the difficulty group.
+
 ##### response (200):
 ```
 {
@@ -71,6 +75,11 @@
 ```
 
 #### Read Setting - /api/difficulty/:difficulty/setting/:label
+
+##### parameters:
+ * difficulty - The label of the difficulty group.
+ * label - The setting label.
+
 ##### response (200):
 ```
 {
@@ -83,6 +92,10 @@
 ## POST
 
 #### Create Difficulty - /api/difficulty/:difficulty
+
+##### parameters:
+ * difficulty - The label of the difficulty group.
+
 ##### body:
 ```
 {
@@ -104,6 +117,13 @@
 ```
 
 #### Create Setting - /api/difficulty/:difficulty/setting/:label/value/:value/type/:type
+
+##### parameters:
+ * difficulty - The label of the difficulty group.
+ * label - The setting label.
+ * value - The setting value.
+ * type - The setting data type (Number, String, Boolean or Null)
+
 ##### body:
 ```
 Empty
@@ -141,6 +161,10 @@ Empty
 ## PUT
 
 #### Update Difficulty - /api/difficulty/:difficulty
+
+##### parameters:
+ * difficulty - The label of the difficulty group.
+
 ##### body:
 ```
 {
@@ -167,7 +191,15 @@ Empty
 }
 ```
 
-#### Update Setting - /api/difficulty/:difficulty/setting/:settingName/value/:value/label/:label/type/:type
+#### Update Setting - /api/difficulty/:difficulty/setting/:settingLabel/value/:value/label/:label/type/:type
+
+##### parameters:
+ * difficulty - The label of the difficulty group.
+ * settingLabel - The current label of the setting to be modified
+ * label - The setting label.
+ * value - The setting value.
+ * type - The setting data type (Number, String, Boolean or Null)
+
 ##### body:
 ```
 Empty
@@ -192,12 +224,20 @@ Empty
 ## DELETE
 
 #### Delete Difficulty - /api/difficulty/:difficulty
+
+##### parameters:
+ * difficulty - The label of the difficulty group.
+
 ##### response (204):
 ```
 No Content
 ```
 
 #### Delete setting - /api/difficulty/:difficulty/setting/:label
+
+##### parameters:
+ * difficulty - The label of the difficulty group.
+ * label - The setting label.
 
 ##### response (204):
 ```
