@@ -16,9 +16,10 @@ describe('Setting Controller', function () {
       }));
       var difficulty = 'easy';
       var label = 'rockets';
-      var value = 8;
-      setting.create(difficulty, label, value).then(function () {
-        expect(modelStub.calledWith(difficulty, label, value)).to.be.true;
+      var value = '8';
+      var type = 'number';
+      setting.create(difficulty, label, value, type).then(function () {
+        expect(modelStub.calledWith(difficulty, label, Number(value))).to.be.true;
         done();
       });
     });
@@ -35,13 +36,19 @@ describe('Setting Controller', function () {
   });
 
   describe('Update', function () {
-    it('should call models update function', function () {
+    it('should call models update function', function (done) {
       var difficulty = 'easy';
+      var settingName = 'rockets';
       var label = 'rockets';
-      var value = 80;
-      modelStub = sinon.stub(difficultyModel, 'updateSetting');
-      setting.update(difficulty, label, value);
-      expect(modelStub.calledWith(difficulty, label, value)).to.be.true;
+      var value = '80';
+      var type = 'number';
+      modelStub = sinon.stub(difficultyModel, 'updateSetting').returns(new promise (function (resolve, reject) {
+        resolve('test');
+      }));
+      setting.update(difficulty, settingName, label, value, type).then(function () {
+        expect(modelStub.calledWith(difficulty, settingName, label, Number(value))).to.be.true;
+        done();
+      });
     });
   });
 

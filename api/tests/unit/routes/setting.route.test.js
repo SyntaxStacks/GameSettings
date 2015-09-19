@@ -9,7 +9,7 @@ describe('Setting Routes', function () {
 
   beforeEach(function () {
     res = { send: sinon.stub() };
-    req = { params: { difficulty: 'test', label: 'setting', value: 'value' } };
+    req = { params: { difficulty: 'test', label: 'setting', value: 'value', type: 'string' } };
   });
 
   afterEach(function () {

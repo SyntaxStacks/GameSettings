@@ -77,7 +77,7 @@ angular.module('GameSettings.difficulty')
             me.refreshSettings();
           };
 
-          DifficultyAPI.addSetting(me.currentDifficulty.label, setting.label, setting.value)
+          DifficultyAPI.addSetting(me.currentDifficulty.label, setting.label, setting.value, setting.type)
             .then(success);
         }
       },
@@ -89,9 +89,10 @@ angular.module('GameSettings.difficulty')
             var currentSetting = _.find(settings, { label: label });
             currentSetting.label = setting.label;
             currentSetting.value = setting.value;
+            currentSetting.type = setting.type;
             me.currentSettings = settings;
           };
-          DifficultyAPI.updateSetting(me.currentDifficulty.label, label, setting.label, setting.value)
+          DifficultyAPI.updateSetting(me.currentDifficulty.label, label, setting.label, setting.value, setting.type)
             .then(success);
         }
       },

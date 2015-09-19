@@ -103,7 +103,7 @@
 }
 ```
 
-#### Create Setting - /api/difficulty/:difficulty/setting/:label/value/:value
+#### Create Setting - /api/difficulty/:difficulty/setting/:label/value/:value/type/:type
 ##### body:
 ```
 Empty
@@ -167,7 +167,7 @@ Empty
 }
 ```
 
-#### Update Setting - /api/difficulty/:difficulty/setting/:settingName/value/:value/label/:label
+#### Update Setting - /api/difficulty/:difficulty/setting/:settingName/value/:value/label/:label/type/:type
 ##### body:
 ```
 Empty

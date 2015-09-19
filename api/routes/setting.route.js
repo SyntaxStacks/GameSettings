@@ -18,15 +18,16 @@ var noContent = function (res) {
 
 var error = function (res, error) {
   res.statusCode = 400;
-  res.send();
+  res.send(error);
 };
 
 module.exports = {
   post: function (req, res) {
     var difficulty = req.params.difficulty;
     var label = req.params.label;
-    var setting = req.params.value;
-    return settingCtrl.create(difficulty, label, setting)
+    var value = req.params.value;
+    var type = req.params.type;
+    return settingCtrl.create(difficulty, label, value, type)
       .then(_.partial(created, res))
       .catch(_.partial(error, res));
   },
@@ -42,7 +43,8 @@ module.exports = {
     var settingName = req.params.settingName;
     var label = req.params.label;
     var value = req.params.value;
-    return settingCtrl.update(difficulty, settingName, label, value)
+    var type = req.params.type;
+    return settingCtrl.update(difficulty, settingName, label, value, type)
       .then(_.partial(ok, res))
       .catch(_.partial(error, res));
   },

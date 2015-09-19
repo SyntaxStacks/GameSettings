@@ -65,7 +65,7 @@ module.exports = {
       resolve(me.model.remove({ label: difficulty }));
     });
   },
-  createSetting: function (difficulty, label, value) {
+  createSetting: function (difficulty, label, value, type) {
     var me = this;
     return new Promise(function (resolve, reject) {
       return me.model.findOne({ label: difficulty }, function (err, diff) {

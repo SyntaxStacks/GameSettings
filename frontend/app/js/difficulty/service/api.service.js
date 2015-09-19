@@ -46,14 +46,14 @@ angular.module('GameSettings.difficulty')
           }
         },
         addSetting: {
-          value: function (difficulty, label, value) {
-            var url = [this.apiPath, 'difficulty', difficulty, 'setting', label, 'value', value].join('/');
+          value: function (difficulty, label, value, type) {
+            var url = [this.apiPath, 'difficulty', difficulty, 'setting', label, 'value', value, 'type', type].join('/');
             return $http.post(url);
           }
         },
         updateSetting: {
-          value: function (difficulty, settingName, label, value) {
-            var url = [this.apiPath, 'difficulty', difficulty, 'setting', settingName, 'value', value, 'label', label].join('/');
+          value: function (difficulty, settingName, label, value, type) {
+            var url = [this.apiPath, 'difficulty', difficulty, 'setting', settingName, 'value', value, 'type', type, 'label', label].join('/');
             return $http.put(url);
           }
         },

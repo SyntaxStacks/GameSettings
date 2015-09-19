@@ -39,12 +39,12 @@ describe('Difficulty Menu', function () {
     });
 
     it('should add a setting', function () {
-      page.addSetting('ammo', 70);
+      page.addSetting('ammo', 70, 'Number');
       expect(page.setting('ammo').isDisplayed()).to.eventually.be.true;
     });
 
     it('should modify a setting', function () {
-      page.modifySetting('ammo', 103);
+      page.modifySetting('ammo', 103, 'String');
       expect(page.setting('ammo').getText()).to.eventually.contain('103');
     });
 
@@ -54,12 +54,12 @@ describe('Difficulty Menu', function () {
     });
 
     it('should modify a setting, remove another, and have correct values', function () {
-      page.modifySetting('health', 103);
-      expect(page.setting('health').getText()).to.eventually.contain('103');
+      page.modifySetting('health', 109, 'Number');
+      expect(page.setting('health').getText()).to.eventually.contain('109');
 
       page.removeSetting('enemies');
       expect(page.setting('enemies').isPresent()).to.eventually.be.false;
-      expect(page.setting('health').getText()).to.eventually.contain('103');
+      expect(page.setting('health').getText()).to.eventually.contain('109');
     });
   });
 });

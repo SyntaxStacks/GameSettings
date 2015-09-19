@@ -6,7 +6,7 @@ module.exports = function (app) {
   var endpoints = {
     post: {
       '/api/difficulty/:difficulty': difficulty.post,
-      '/api/difficulty/:difficulty/setting/:label/value/:value': setting.post,
+      '/api/difficulty/:difficulty/setting/:label/value/:value/type/:type': setting.post,
       '/api/reset-database': difficulty.reset
     },
     get: {
@@ -16,7 +16,7 @@ module.exports = function (app) {
     },
     put: {
       '/api/difficulty/:difficulty': difficulty.put,
-      '/api/difficulty/:difficulty/setting/:settingName/value/:value/label/:label': setting.put
+      '/api/difficulty/:difficulty/setting/:settingName/value/:value/type/:type/label/:label': setting.put
     },
     delete: {
       '/api/difficulty/:difficulty': difficulty.delete,
